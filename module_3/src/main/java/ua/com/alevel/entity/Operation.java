@@ -14,9 +14,10 @@ public class Operation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", nullable = false)
+    @JoinColumn(name = "balance_id", nullable = false)
     private Balance balance;
 
+    @Column(nullable = false)
     private long amount;
 
     private String description;
