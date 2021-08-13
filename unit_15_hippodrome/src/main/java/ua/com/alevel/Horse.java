@@ -13,22 +13,14 @@ final class Horse implements Runnable {
 
     private static final Queue<String> finishQ = new ArrayBlockingQueue<>(10);
 
-    private final String name;
+    private String name;
 
     private Hippodrome hippodrome;
 
     private int position;
 
-    Horse(String name) {
+    Horse(String name){
         this.name = name;
-    }
-
-    String getName() {
-        return name;
-    }
-
-    public Queue<String> getFinishQ(){
-        return finishQ;
     }
 
     @Override
@@ -65,4 +57,7 @@ final class Horse implements Runnable {
         return hippodrome.random.nextInt(max - min + 1) + min;
     }
 
+    public Queue<String> getFinishQ(){
+        return finishQ;
+    }
 }
