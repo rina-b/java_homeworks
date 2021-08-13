@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Queue;
 
 public class HippodromeMain {
-    private static final int RACE_LENGTH = 1000;
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
-        Hippodrome race = new Hippodrome(RACE_LENGTH);
+        Hippodrome race = new Hippodrome();
 
         System.out.println("Welcome to HappyHippodrome! \n" +
                 "Chose your lucky horse number from 1 to 10.");
@@ -31,9 +30,8 @@ public class HippodromeMain {
         List<Integer> allHorses  = new ArrayList<>();
 
         for (String name : horses){
-            allHorses.add(Integer.parseInt(name.replaceAll("\\D+","")));
+            allHorses.add(Integer.parseInt(name.substring(14)));
         }
-
         for (int i = 0; i < allHorses.size(); i++) {
             if (allHorses.get(i) == choice) {
                 System.out.println("Your horse came " + (i+1));

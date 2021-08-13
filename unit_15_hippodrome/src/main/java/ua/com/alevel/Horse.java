@@ -1,6 +1,7 @@
 package ua.com.alevel;
 
 import java.util.Queue;
+import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 
 final class Horse implements Runnable {
@@ -11,23 +12,18 @@ final class Horse implements Runnable {
     private static final int MIN_SLEEP = 400;
     private static final int MAX_SLEEP = 500;
 
-    private static final Queue<String> finishQ = new ArrayBlockingQueue<>(10);
+    int distance = 1000;
 
-    private String name;
+    final Random random = new Random();
 
-    private Hippodrome hippodrome;
+    private static Queue<String> finishQ = new ArrayBlockingQueue<>(10);
 
     private int position;
 
-    Horse(String name){
-        this.name = name;
-    }
 
     @Override
     public void run() {
         position = 0;
-
-        int distance = hippodrome.distance;
         do {
             move();
             delay();
@@ -48,13 +44,13 @@ final class Horse implements Runnable {
     private void move() {
         int move = Math.min(
                 randomNum(MAX_MOVE, MIN_MOVE),
-                hippodrome.distance - position);
+                distance - position);
         position += move;
-        System.out.printf("%s ran %d meters, total of %d%n", name, move, position);
+        System.out.printf("%s ran %d meters, total of %d%n", Thread.currentThread().getName(), move, position);
     }
 
     private int randomNum(int max, int min) {
-        return hippodrome.random.nextInt(max - min + 1) + min;
+        return random.nextInt(max - min + 1) + min;
     }
 
     public Queue<String> getFinishQ(){
