@@ -19,22 +19,24 @@ public class HippodromeMain {
 
         try {
             choice = Integer.parseInt(reader.readLine());
-            if (choice<0 || choice> 10)
-                throw new RuntimeException("There is no such horse: "+ choice);
+            System.out.println("Your horse`s number is " + choice);
+            if (choice < 0 || choice > 10)
+                throw new RuntimeException("There is no such horse: " + choice);
         } catch (IOException e) {
             throw new RuntimeException(e.getCause());
         }
 
+        System.out.println("_________________________THE RACE IS STARTING!!!_____________________________");
 
-        Queue<String> horses = race.getFinishedHorses();
-        List<Integer> allHorses  = new ArrayList<>();
+        Queue horses = race.getFinishedHorses();
+        List<Integer> allHorses = new ArrayList<>();
 
-        for (String name : horses){
-            allHorses.add(Integer.parseInt(name.substring(14)));
+        for (Object name : horses) {
+            allHorses.add(Integer.parseInt(name.toString().substring(20, 23).replaceAll("\\D+", "")));
         }
         for (int i = 0; i < allHorses.size(); i++) {
             if (allHorses.get(i) == choice) {
-                System.out.println("Your horse came " + (i+1));
+                System.out.println("Your horse came " + (i + 1));
             }
         }
 

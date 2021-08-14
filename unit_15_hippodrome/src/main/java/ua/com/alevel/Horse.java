@@ -3,8 +3,9 @@ package ua.com.alevel;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Callable;
 
-final class Horse implements Runnable {
+final class Horse implements Callable {
 
     private static final int MIN_MOVE = 100;
     private static final int MAX_MOVE = 200;
@@ -22,15 +23,15 @@ final class Horse implements Runnable {
 
 
     @Override
-    public void run() {
+    public Queue call() {
         position = 0;
         do {
             move();
             delay();
         } while (position < distance);
 
-        finishQ.add(Thread.currentThread().getName());
-
+        finishQ.add(Thread.currentThread().toString());
+        return getFinishQ();
     }
 
     private void delay() {
@@ -53,7 +54,7 @@ final class Horse implements Runnable {
         return random.nextInt(max - min + 1) + min;
     }
 
-    public Queue<String> getFinishQ(){
+    public Queue<String> getFinishQ() {
         return finishQ;
     }
 }
